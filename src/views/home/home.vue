@@ -1,6 +1,6 @@
 <template>
-  <div>
-    Find
+  <div class="layoutPages">
+    <div class="w">Find</div>
   </div>
 </template>
 

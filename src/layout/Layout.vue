@@ -1,10 +1,8 @@
 <template>
     <div>
-        <div>
-            <layout-header/>
-            <layout-appmain/>
-            <layout-footer/>
-        </div>
+        <layout-header/>
+        <layout-appmain/>
+        <layout-footer/>
     </div>
 </template>
 

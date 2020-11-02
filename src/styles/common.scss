@@ -1,6 +1,11 @@
 .commin-header{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
     .header{
-        overflow: hidden;
+        display: flow-root;
+        // overflow: hidden;
         width: 100%;height: 54px;background-color: #000000;
     }
     .l{float: left;}
@@ -23,11 +28,9 @@
         margin-top: 19px;margin-bottom: 19px;
         background-color: #ffffff;
     }
-
     .description{
         line-height: 54px; font-size: 13px;color: #fff;
     }
-
     .nav{
         line-height: 54px;
         margin-left: 8%;
@@ -44,8 +47,9 @@
         }
     }
     .search{
-        float: left;
-        margin-left: 7.5%;
+        // float: left;
+        // margin-left: 7.5%;
+        margin-right: 25px;
         width: 220px;
         // margin: 0 auto;
         position: relative;
@@ -101,4 +105,104 @@
         .img{width: 22px;height: 22px;position: absolute;top: 0;bottom: 0;margin: auto;}
     }
 
+    .porup{
+        z-index: 20;
+        position: absolute;
+        height: 450px;
+        top: 54px;
+        right: 3.5%;
+        width: 320px;
+        background-color: #fff;
+        border-bottom: 1px solid #c0c0c0;
+        border-left: 1px solid #c0c0c0;
+        border-right: 1px solid #c0c0c0;
+        .user{
+            border-bottom: 1px solid #dadada;
+            display: flow-root;
+            padding-left: 25px;
+            margin-top: 30px;
+            padding-bottom: 30px;
+            .header{float: left;
+                width: 50px;height: 50px;
+                border-radius:50px;overflow: hidden;
+                img{
+                    width: 100%;
+                }
+            }
+            .rbox{float: left;height: 50px;margin-left: 15px;}
+            .username{height: 25px;font-size: 16px;font-weight: bold;}
+            .button{height: 25px;font-size: 14px;color: #007eff;}
+        }
+        .mun{
+            margin-top: 25px;
+            .item{
+                height: 20px;margin-left: 36px;line-height: 20px;margin-bottom: 29px;
+                .ico{height: 20px;width: 20px;float: left;
+                img{
+                    width: 100%;
+                }}
+                .name{float: left;height: 20px;margin-left: 15px;line-height: 20px;font-size: 12px;}
+            }
+        }
+        .search2{
+            position: relative;
+            border-top: 1px solid #dadada;
+            padding: 36px;
+            .buttom{
+                font-size: 14px;
+                line-height: 36px;
+                text-align: center;
+                position: absolute;
+                width: 50px;height: 34px;
+                // background-color: #f4f4f4;
+                right: 28px;
+                top: 36px;
+                border: 1px solid #000;
+                padding: 2px;
+            }
+            .input{width: 76%;height: 34px;}
+        }
+        .logout{
+            position: absolute;
+            right: 25px;
+            bottom: 25px;
+            .ico{float: right;line-height: 25px;}
+            .txt{float: right;line-height: 25px;margin-right: 15px;font-size: 12px;}
+        }
+    }
+
+}
+
+@media screen and (max-width: 1200px) {
+    .commin-header{
+        .search{float: left;margin-left: 4%;}
+        .lien{display: none;}
+        .description{display: none;}
+        .nav{
+            margin-left: 4%;
+        }
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .commin-header{
+        .porup{
+            z-index: 20;
+            position: absolute;
+            height: calc(100vh - 54px);
+            top: 54px;
+            right: 0;
+            width: 320px;
+            background-color: rgba(255, 255, 255, 0.439);
+            // border-bottom: 0px solid #c0c0c0;
+            border-left: 1px solid #c0c0c0;
+            // border-right:0px solid #c0c0c0;
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .layoutPages{
+        margin-top: 50px;
+    }
 }
