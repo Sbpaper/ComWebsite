@@ -17,6 +17,17 @@
     }
 }
 
+.layout-lr2{
+    .l1{
+        float: left;
+        width: 235px;
+    }
+    .r1{
+        float: right;
+        width: calc(100% - 235px);
+    }
+}
+
 @media screen and (max-width: 992px) {
     .layoutPages{
         margin-top: 80px;
