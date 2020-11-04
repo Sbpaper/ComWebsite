@@ -1,6 +1,6 @@
 <template>
   <div class="article-item">
-    <div>
+    <div v-if="sty == 0">
       <router-link :to="'/content/' + data.id">
         <div class="itembox-style1">
           <div class="cover">
@@ -67,6 +67,10 @@ export default {
         }
       }
     },
+    sty:{
+      type: Number,
+      default:0
+    }
   },
 };
 </script>

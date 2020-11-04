@@ -47,9 +47,9 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
 
-$itemheight: 35px;
+$itemheight: 40px;
 .TabMunhead{
-  margin-bottom: 30px;
+  // margin-bottom: 30px;
   width: 100%;
   display: flow-root;
 }
@@ -70,6 +70,7 @@ $itemheight: 35px;
     border-bottom: 2px solid #d4d4d4;
     height: $itemheight;
     padding-left: 10px;padding-right: 10px;
+    color: #007eff;
     }
 }
 </style>

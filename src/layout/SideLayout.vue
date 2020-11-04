@@ -9,7 +9,7 @@
 <script>
 import header from './components/Header.vue'
 import footer from './components/Footer.vue'
-import appmain from './AppMain'
+import appmain from './SideLayout-AppMain'
     export default {
         name:'Home',
         methods: { //事件处理器

@@ -1,42 +1,33 @@
 <template>
   <div>
-      <TabMunhead :tabname=hotTab.name :querymun=hotTab.mun :index.sync=hotTab.index @query="gethotTab()"/>
-      <el-row :gutter="40">
-        <el-col :span="12" v-for="(item, index) in hotTab.data" :key="'hotTab' + index">
-          <Articleitem :data=item :sty="0" />
-        </el-col>
-        <el-col :span="12" v-for="(item, index) in hotTab.data" :key="'hotTab1' + index">
-          <Articleitem :data=item :sty="0" />
-        </el-col>
-      </el-row>
-      <TabMunhead :tabname=newTab.name />
-      <el-row :gutter="40">
-        <el-col :span="12" v-for="(item, index) in hotTab.data" :key="'hotTab2' + index">
-          <Articleitem :data=item :sty="0" />
-        </el-col>
-        <el-col :span="12" v-for="(item, index) in hotTab.data" :key="'hotTab3' + index">
-          <Articleitem :data=item :sty="0" />
-        </el-col>
-      </el-row>
+    <TabMunhead :tabname=name :querymun=mun :index.sync=index @query="gethotTab()"/>
+    <FilterBar :filter.sync=filter @query="gethotTab()" />
+    <Articleitem v-for="(item, index) in data" :key="'Articleitem' + index" :data=item :sty="0" />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import TabMunhead from "@/components/TabMunhead.vue";
+import FilterBar from "@/components/FilterBar.vue";
 import Articleitem from "@/components/item/Articleitem.vue";
 export default {
-  name: "Find",
+  name: "category",
   data() {
     return {
-      hotTab:{
-        name:"热门文章",
+        name:"理学",
         index: 0,
+        filter: 0,
         mun:[
           {name:"全部", id:1},
           {name:"站内原创", id:2},
-          {name:"趣味论文", id:3},
+          {name:"趣味论文分享", id:3},
           {name:"趣味网文分享", id:4}
+        ],
+        filtertype:[
+          {name:"最新", id:1},
+          {name:"热门", id:2},
+          {name:"评论数", id:3}
         ],
         data:[
           {
@@ -57,21 +48,14 @@ export default {
             }
           }
         ]
-      },
-      newTab:{
-        name:"最新投稿",
-      }
     };
   },
   components: {
-    TabMunhead, Articleitem
+    TabMunhead, FilterBar, Articleitem
   },
   methods: {
     gethotTab(){
-      console.log("触发获取",this.hotTab.mun[this.hotTab.index].id)
-    },
-    getnewTab(){
-      console.log("触发获取","getnewTab")
+      console.log("触发获取",this.mun[this.index].id, this.filtertype[this.filter].id)
     }
   },
   created() {

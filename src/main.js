@@ -13,36 +13,51 @@ Vue.config.productionTip = false
 Vue.use(ElementUI)
 Vue.component('Pagination', Pagination)
 
-const whiteList = ['/','/login','/404'] // 不重定向白名单
+// const whiteList = ['/','/login','/404','/category','/tag'] // 不重定向白名单
+// router.beforeEach((to, from, next) => {
+//     let user = getuser()
+//     console.log('Main>UserDATA',user)
+//     if (user.Token) {
+//       if (!user.Token) {
+//         if (to.path === '/login') {
+//           router.push({ name: "login", params: { msg: "登录失效" } })
+//         } else {
+//           if (JSON.stringify(to.query || {}) == '{}') {
+//             next({path: to.path})
+//           } else {
+//             next({path: to.path,query: to.query})
+//           }
+//         }
+//       } else {
+//         if (to.path === '/login') {
+//           router.push({ name: "home" })
+//         } else {
+//           next()
+//         }
+//       }
+//     } else {
+//       if (whiteList.indexOf(to.path) !== -1) {
+//         next()
+//       } else {
+//         router.push({ name: "login", params: { msg: "登录失效" } })
+//       }
+//     }
+//   })
+
 router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requireAuth)) { // 判断该路由是否需要登录权限
+    // this route requires auth, check if logged in
+    // if not, redirect to login page.
     let user = getuser()
-    console.log('Main>UserDATA',user)
-    if (user.Token) {
-      if (!user.Token) {
-        if (to.path === '/login') {
-          router.push({ name: "login", params: { msg: "登录失效" } })
-        } else {
-          if (JSON.stringify(to.query || {}) == '{}') {
-            next({path: to.path})
-          } else {
-            next({path: to.path,query: to.query})
-          }
-        }
-      } else {
-        if (to.path === '/login') {
-          router.push({ name: "home" })
-        } else {
-          next()
-        }
-      }
+    if (!user.Token) {
+      router.push({ name: "login", params: { msg: "登录失效" } })
     } else {
-      if (whiteList.indexOf(to.path) !== -1) {
-        next()
-      } else {
-        router.push({ name: "login", params: { msg: "登录失效" } })
-      }
+      next()
     }
-  })
+  } else {
+    next()  // 确保一定要调用next()
+  }
+})
 
 Object.defineProperty(Vue.prototype, '$http', {
   value: function(requestPromise, successCallback) {

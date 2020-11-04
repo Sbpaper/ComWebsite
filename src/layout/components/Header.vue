@@ -4,21 +4,28 @@
     <div class="header">
       <div class="w">
 
-        <div class="logo l">
+        <div class="logo l" @click="gohome()">
           <img src="@/assets/img/logo.png" />
         </div>
 
-        <div class="txtlogo l">
+        <div class="txtlogo l" @click="gohome()">
           <img src="@/assets/img/txt-logo.png" />
         </div>
 
         <div class="lien l"></div>
 
-        <div class="description l">看沙雕，上沙雕</div>
+        <div class="description l" @click="gohome()">看沙雕，上沙雕</div>
 
         <div class="nav l">
-          <div class="item"><div class="content">发现</div></div>
-          <div class="active"><div class="content">我的订阅</div></div>
+
+          <router-link class="normal" :to="'/'" exact>
+            <div class="item"><div class="content">发现</div></div>
+          </router-link>
+
+          <router-link class="normal" :to="'/subscription'" exact>
+            <div class="active"><div class="content">我的订阅</div></div>
+          </router-link>
+          
         </div>
         
         <div class="userhead r" @click="openporupc">
@@ -99,7 +106,7 @@ export default {
     };
   },
   created(){
-      console.log('true')
+      // console.log('true')
       if(document.body.clientWidth > 992){
           this.headermodule = 1
       }else{
@@ -107,9 +114,9 @@ export default {
       }
   },
   watch: {
-    headermodule(val){
-      console.log(val)
-    },
+    // headermodule(val){
+    //   console.log(val)
+    // },
 
     screenWidth(val) {
       // 为了避免频繁触发resize函数导致页面卡顿，使用定时器
@@ -141,6 +148,9 @@ export default {
     };
   },
   methods: {
+    gohome(){
+      router.push({ name: "homeFind" })
+    },
     openporupc(){
       if(this.openporup == false){
         this.openporup = true
