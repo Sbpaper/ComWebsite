@@ -45,7 +45,7 @@
           <div class="li">
             <div class="icon"><img src="@/assets/ico/search.png" /></div>
             <div class="input">
-              <input  placeholder="Serach"/>
+              <input placeholder="Serach" @keyup.enter="searchEnterFun" v-model="searchinput"/>
             </div>
           </div>
         </div>
@@ -78,8 +78,8 @@
             </div>
           </div>
           <div class="search2"  v-if="headermodule == 2">
-            <div class="buttom">搜索</div>
-            <input class="input" placeholder="请输入内容"/>
+            <div class="buttom" @click="searchEnterFun()">搜索</div>
+            <input class="input" v-model="searchinput" @keyup.enter="searchEnterFun" placeholder="请输入内容"/>
           </div>
           <div class="logout" @click="logoutbutton()">
             <div class="ico"><img src="@/assets/ico/header-logout.png" /></div>
@@ -100,6 +100,7 @@ export default {
   components: {},
   data() {
     return {
+      searchinput: "",
       openporup: false,
       headermodule: 1,
       screenWidth: document.body.clientWidth,
@@ -148,6 +149,11 @@ export default {
     };
   },
   methods: {
+    searchEnterFun(){
+      if (this.searchinput != "" && this.searchinput){
+        router.push({name:'homeSearch',query: {keyword:this.searchinput}})
+      }
+    },
     gohome(){
       router.push({ name: "homeFind" })
     },

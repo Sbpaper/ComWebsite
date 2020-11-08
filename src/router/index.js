@@ -6,13 +6,13 @@ Vue.use(VueRouter)
 /* Layout */
 import FullLayout from '../layout/FullLayout'
 import SideLayout from '../layout/SideLayout'
+import UserLayout from '../layout/UserLayout'
 
 const routes = [
   { path: '/404', component: () => import('@/views/404'), hidden: true },
   {
     path: '/',
     component: SideLayout,
-    meta: {title:'发现'},
     children: [
       {
         path: '/',
@@ -20,6 +20,18 @@ const routes = [
         component: () => import('@/views/home/home.vue'),
         meta: {title:'发现', requireAuth: false}
       },
+      {
+        path: 'search',
+        name: 'homeSearch',
+        component: () => import('@/views/home/search.vue'),
+        meta: {title:'搜索', requireAuth: false}
+      }
+    ]
+  },
+  {
+    path: '/',
+    component: UserLayout,
+    children: [
       {
         path: 'subscription',
         name: 'homeSubscription',
@@ -59,8 +71,21 @@ const routes = [
       {
         path: ':id',
         name: 'labelTag',
-        component: () => import('@/views/label/tag.vue'),
+        component: () => import('@/views/label/tagitem.vue'),
         meta: {title:'标签ID', requireAuth: false}
+      }
+    ]
+  },
+  {
+    path: '/u/:id',
+    component: FullLayout,
+    hidden: true,
+    children: [
+      {
+        path: '/',
+        name: 'content',
+        component: () => import('@/views/home/userhome.vue'),
+        meta: {title:'用户主页'}
       }
     ]
   },
@@ -71,7 +96,7 @@ const routes = [
     children: [
       {
         path: '/',
-        name: 'content',
+        name: 'userspace',
         component: () => import('@/views/content/index.vue'),
         meta: {title:'内容'}
       }

@@ -19,12 +19,13 @@
 
 .layout-lr2{
     .l1{
+        position: fixed;
         float: left;
         width: 235px;
     }
     .r1{
         float: right;
-        width: calc(100% - 235px);
+        width: calc(100% - 275px);
     }
 }
 

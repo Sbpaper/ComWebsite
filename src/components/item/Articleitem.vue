@@ -1,7 +1,8 @@
 <template>
   <div class="article-item">
+
     <div v-if="sty == 0">
-      <router-link :to="'/content/' + data.id">
+      <router-link target="_blank" :to="'/content/' + data.id">
         <div class="itembox-style1">
           <div class="cover">
             <img :src="data.cover" />
@@ -33,6 +34,34 @@
         </div>
       </router-link>
     </div>
+
+    <div v-if="sty == 1">
+      <router-link target="_blank" :to="'/content/' + data.id">
+      <div class="itembox-style2">
+        <div class="cover">
+          <div class="bar" :style="`background-image: url(${require('@/assets/img/articleitemboxshow.png')});`">
+            <div class="type" v-bind:class="{'sourcetypec1':data.sourcetype == 1,'sourcetypec2':data.sourcetype == 2,'sourcetypec3':data.sourcetype == 3}">
+              {{sourcetype[data.sourcetype]}}
+            </div>
+            <div class="item">
+              <div class="ico"><img src="@/assets/img/articleitemcemcount.png"></div>
+              <div class="txt"><span>38</span> 个评论</div>
+            </div>
+          </div>
+          <img :src="data.cover" />
+        </div>
+        <div class="title">
+          <div class="main">{{ data.title }}</div>
+          <div class="bar">
+            <div class="item">作者: <span>{{data.author}}</span></div>
+            <div class="item">投稿者: <span>{{data.user.username}}</span></div>
+          </div>
+        </div>
+      </div>
+        
+      </router-link>
+    </div>
+
   </div>
 </template>
 
@@ -138,15 +167,6 @@ export default {
       line-height: 18px;
       margin-right: 15px;
   }
-  .sourcetypec1{
-      background-color: #007eff;
-  }
-  .sourcetypec2{
-      background-color: #0dbe00;
-  }
-  .sourcetypec3{
-      background-color: #ff9600;
-  }
   .author{float: left;margin-right: 15px;}
   .category{float: left;margin-right: 15px;}
   .user{float: left;margin-right: 15px;}
@@ -155,5 +175,45 @@ export default {
         img{width: 100%;padding-top: 4px;}
     }
   }
+}
+.itembox-style2{
+  width: 100%;
+  .cover{
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    .bar{
+      padding: 10px; position: absolute;bottom: 5px;left: 0;right: 0;
+      .type{
+        height: 18px;font-size: 12px;line-height: 18px;padding-left: 10px;padding-right: 10px;float: left;color: #fff;border-radius: 3px;
+      }
+      .item{
+        float: left;color: #fff;line-height: 18px; font-size: 12px;margin-left: 10px;
+        .ico{width: 13px;height: 12px;float: left;margin-right: 5px;margin-top: 2px;}
+        .txt{
+          float: left;
+        }
+      }
+    }
+    img{width: 100%;}
+  }
+  .title{
+    .main{height: 35px;width: 100%;font-size: 14px;}
+    .bar{
+      margin-top: 13px;
+      color: #6f6f6f;
+      font-size: 13px;
+      .item{float: left;margin-right: 10px;}
+    }
+  }
+}
+.sourcetypec1{
+    background-color: #007eff;
+}
+.sourcetypec2{
+    background-color: #0dbe00;
+}
+.sourcetypec3{
+    background-color: #ff9600;
 }
 </style>

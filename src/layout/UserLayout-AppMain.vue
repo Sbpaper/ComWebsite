@@ -5,16 +5,15 @@
         <div class="layout-lr2">
           <div class="l1">
             <IndexSidebar
-              :tabname="'主学科'"
+              :tabname="'我关注的作者'"
               :link="'/category/'"
               :tablink="'/category'"
             />
             <IndexSidebar
-              :tabname="'专业标签'"
+              :tabname="'我感兴趣的标签'"
               :link="'/tag/'"
               :tablink="'/tag'"
             />
-            <IndexSidebar :tabname="'热门内容标签'" :link="'/tag/'" />
           </div>
           <div class="r1">
             <transition name="fade-transform" mode="out-in">

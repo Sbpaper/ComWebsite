@@ -1,15 +1,17 @@
 <template>
     <div>
+        
         <layout-header/>
-            <layout-appmain/>
+        <layout-appmain/>
         <layout-footer/>
+        
     </div>
 </template>
 
 <script>
 import header from './components/Header.vue'
 import footer from './components/Footer.vue'
-import appmain from './FullLayout-AppMain'
+import appmain from './UserLayout-AppMain'
     export default {
         name:'Home',
         methods: { //事件处理器

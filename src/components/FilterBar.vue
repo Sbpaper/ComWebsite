@@ -1,9 +1,9 @@
 <template>
-  <div class="FilterBar">
+  <div class="FilterBar" v-bind:class="{'FilterBarTBorder':tborder == true}">
       <div class="item">
-        排序
+        {{filterAllname}}
       </div>
-      <div v-for="(item, index) in filtertype" :key="'FilterBar' + '-' + index" v-bind:class="{'active':index == i ,'item':index != i}" @click="queryChange(index)">
+      <div v-for="(item, index) in filterParams" :key="'FilterBar' + '-' + index" v-bind:class="{'active':index == filter ,'item':index != filter}" @click="queryChange(index)">
         {{item.name}}
       </div>
   </div>
@@ -14,15 +14,19 @@ export default {
   name: 'FilterBar',
   data(){
     return{
-      i:0
+      // i:0
     }
   },
   props: {
+    filterAllname:{
+      type: String,
+      default:"排序"
+    },
     filter:{
       type: Number,
       default:0
     },
-    filtertype:{
+    filterParams:{
       type: Array,
       default: function(){
         return [
@@ -31,12 +35,16 @@ export default {
           {name:"评论数", id:3}
         ]
       }
-    }
+    },
+    tborder:{
+      type: Boolean,
+      default:true
+    },
   },
   methods: {
     queryChange(index) {
       // console.log(index)
-      this.i = index
+      // this.i = index
       this.$emit("update:filter", index)
       this.$emit('query')
     }
@@ -48,8 +56,10 @@ export default {
 <style lang="scss" scoped>
 
 $itemheight: 45px;
-.FilterBar{
+.FilterBarTBorder{
   border-top: 1px solid #cecece;
+}
+.FilterBar{
   width: 100%;
   display: flow-root;
   font-size: 13px;

@@ -1,22 +1,27 @@
 <template>
   <div>
-    <TabMunhead :tabname="'订阅内容'" :querymun=mun :index.sync=TabMunheadindex @query="gethotTab()"/>
+    <MaxTagBar :id="1"/>
+    <FilterBar :filter.sync=filter :tborder="false" @query="gethotTab()" />
     <Articleitem v-for="(item, index) in data" :key="'Articleitem' + index" :data=item :sty="0" />
+    <!-- tag
+    <div v-if="$route.params.id">IDData {{ $route.params.id }}</div> -->
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import TabMunhead from "@/components/TabMunhead.vue";
+import MaxTagBar from "@/components/MaxTagBar.vue";
+import FilterBar from "@/components/FilterBar.vue";
 import Articleitem from "@/components/item/Articleitem.vue";
 export default {
-  name: "subscription",
+  name: "tag",
   data() {
     return {
-      TabMunheadindex:0,
-      mun:[
-        {name:"我的关注", id:1},
-        {name:"标签内容更新", id:2}
+      filter: 0,
+      filtertype:[
+        {name:"最新", id:1},
+        {name:"热门", id:2},
+        {name:"评论数", id:3}
       ],
       data:[
         {
@@ -40,11 +45,11 @@ export default {
     };
   },
   components: {
-    TabMunhead, Articleitem
+    MaxTagBar, FilterBar, Articleitem
   },
   methods: {
     gethotTab(){
-      console.log("触发获取",this.mun[this.TabMunheadindex].id)
+      console.log(this.filtertype[this.filter])
     }
   },
   created() {

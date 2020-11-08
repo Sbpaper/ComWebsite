@@ -1,8 +1,11 @@
 <template>
     <div>
+        
         <layout-header/>
         <layout-appmain/>
         <layout-footer/>
+        
+        
     </div>
 </template>
 
