@@ -29,6 +29,42 @@ const routes = [
     ]
   },
   {
+    path: '/account',
+    component: FullLayout,
+    children: [
+      {
+        path: '',
+        name: 'UserAccount',
+        component: () => import('@/views/user/account.vue'),
+        meta: {title:'我的账户', requireAuth: false}
+      }
+    ]
+  },
+  {
+    path: '/create',
+    component: FullLayout,
+    children: [
+      {
+        path: '',
+        name: 'UserCreate',
+        component: () => import('@/views/create/create.vue'),
+        meta: {title:'我的创作', requireAuth: false}
+      }
+    ]
+  },
+  {
+    path: '/push',
+    component: FullLayout,
+    children: [
+      {
+        path: '',
+        name: 'Push',
+        component: () => import('@/views/home/push.vue'),
+        meta: {title:'发布', requireAuth: false}
+      }
+    ]
+  },
+  {
     path: '/',
     component: UserLayout,
     children: [

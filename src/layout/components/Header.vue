@@ -33,9 +33,11 @@
           <div class="img"><img src="@/assets/userhead.png" /></div>
         </div>
 
-        <div class="icobut r" v-if="headermodule == 1">
-          <div class="img"><img src="@/assets/ico/header-add.png"></div>
-        </div>
+        <router-link :to="'/push'" exact>
+          <div class="icobut r" v-if="headermodule == 1">
+            <div class="img"><img src="@/assets/ico/header-add.png"></div>
+          </div>
+        </router-link>
 
         <div class="icobut r" v-if="headermodule == 1">
           <div class="img"><img src="@/assets/ico/header-msg.png"></div>
@@ -68,13 +70,17 @@
               <div class="ico"><img src="@/assets/ico/header-add2.png" /></div>
               <div class="name">新增</div>
             </div>
-            <div class="item">
+            <div class="item" @click="openporup = false">
+              <router-link :to="'/u/' + userid" exact>
               <div class="ico"><img src="@/assets/ico/header-my.png" /></div>
               <div class="name">我的主页</div>
+              </router-link>
             </div>
-            <div class="item">
+            <div class="item" @click="openporup = false">
+              <router-link :to="'/create'" exact>
               <div class="ico"><img src="@/assets/ico/header-create.png" /></div>
               <div class="name">我的创作</div>
+              </router-link>
             </div>
           </div>
           <div class="search2"  v-if="headermodule == 2">
@@ -93,7 +99,7 @@
 </template>
 
 <script>
-import { logout } from "@/utils/auth";
+import { logout, getuser } from "@/utils/auth";
 import router from '@/router'
 export default {
   name: "Header",
@@ -104,6 +110,7 @@ export default {
       openporup: false,
       headermodule: 1,
       screenWidth: document.body.clientWidth,
+      userid: null,
     };
   },
   created(){
@@ -113,6 +120,14 @@ export default {
       }else{
           this.headermodule = 2
       }
+
+    let creuser = getuser()
+    if (creuser.Token){
+      this.userid = creuser.UserID
+    }else{
+      this.userid = 1
+    }
+
   },
   watch: {
     // headermodule(val){
@@ -168,6 +183,6 @@ export default {
       logout()
       router.push({ name: "login" })
     }
-  },
+  }
 };
 </script>
