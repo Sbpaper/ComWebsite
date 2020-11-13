@@ -6,7 +6,7 @@ const USER_DATA_KEY = {
 }
 
 export function getuser() {
-  console.log("获取用户信息")
+  console.log("[auth.js]获取用户信息")
   return {
     Username: window.localStorage.getItem(USER_DATA_KEY.Username),
     Token: window.localStorage.getItem(USER_DATA_KEY.Token),
@@ -16,7 +16,7 @@ export function getuser() {
 }
 
 export function login(token, Username, Userhead, UserID) {
-  console.log("成功记录用户信息")
+  console.log("[auth.js]成功记录用户信息")
   window.localStorage.setItem(USER_DATA_KEY.Token, token)
   window.localStorage.setItem(USER_DATA_KEY.Username, Username)
   window.localStorage.setItem(USER_DATA_KEY.Userhead, Userhead)
@@ -24,11 +24,16 @@ export function login(token, Username, Userhead, UserID) {
   return token
 }
 
+export function uploaduserhead(Userhead){
+  window.localStorage.setItem(USER_DATA_KEY.Userhead, Userhead)
+}
+
+
 export function logout() {
   window.localStorage.removeItem(USER_DATA_KEY.Token)
   window.localStorage.removeItem(USER_DATA_KEY.Username)
   window.localStorage.removeItem(USER_DATA_KEY.Userhead)
   window.localStorage.removeItem(USER_DATA_KEY.UserID)
   window.localStorage.clear()
-  console.log("退出登录")
+  console.log("[auth.js]退出登录")
 }

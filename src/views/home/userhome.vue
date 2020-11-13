@@ -2,11 +2,11 @@
   <div class="layout">
     <div class="page-header">
       <div class="w">
-        <div class="userheader"><img src="@/assets/userhead.png" /></div>
+        <div class="userheader"><img :src="userinfo.head" /></div>
         <div class="userbar">
-          <div class="username">毕导THU</div>
+          <div class="username">{{userinfo.username}}</div>
           <div class="introduce">
-            数理化狂热爱好者，想做出最好玩的科学视频！公众号/微博：毕导THU。商务联系:bidaodao7
+            {{ userinfo.introduce || "此人很懒什么都没留下"}}
           </div>
           <div class="set">
             <div
@@ -19,9 +19,9 @@
             <div class="follow" v-if="followstatus == 1" @click="unfollow()">
               已关注
             </div>
-            <div class="ditem">粉丝数 <span class="data">2744589</span></div>
-            <div class="ditem">关注数 <span class="data">2744589</span></div>
-            <div class="ditem">获赞 <span class="data">2744589</span></div>
+            <div class="ditem">粉丝数 <span class="data">{{userinfo.fans_count}}</span></div>
+            <div class="ditem">关注数 <span class="data">{{userinfo.follow_count}}</span></div>
+            <div class="ditem">获赞 <span class="data">{{userinfo.praised_count}}</span></div>
           </div>
         </div>
       </div>
@@ -32,66 +32,66 @@
         <div class="layout-lr2">
           <div class="l1" style="position: inherit !important;">
               <div class="barh">介绍</div>
-              <div class="introduce">数理化狂热爱好者，想做出最好玩的科学视频！ 努力周更，没更的话不是咕，是在学习！ 喜欢视频的话请一定要给我三连支持，你们的支持</div>
+              <div class="introduce">{{userinfo.space_introduce || "此人很懒什么都没留下"}}</div>
 
               <div class="linklist">
 
-                <div class="linkitem">
-                  <a target="_blank" href="0">
+                <div class="linkitem" v-if="userinfo.space_url">
+                  <a target="_blank" :href="userinfo.space_url">
                   <div class="ico">
                     <img src="@/assets/ico/userpage-linkico1.png" />
                   </div>
                   <div class="r">
                     <div class="title">TA的链接</div>
-                    <div class="link">http://mp.weixin.qq.com/mp/homepage</div>
+                    <div class="link">{{userinfo.space_url}}</div>
                   </div>
                   </a>
                 </div>
 
-                <div class="linkitem">
-                  <a target="_blank" href="0">
+                <div class="linkitem" v-if="userinfo.space_bili">
+                  <a target="_blank" :href="userinfo.space_bili">
                   <div class="ico">
                     <img src="@/assets/ico/userpage-linkico2.png" />
                   </div>
                   <div class="r">
                     <div class="title">TA的BILIBILI频道</div>
-                    <div class="link">https://space.bilibili.com/254463269</div>
+                    <div class="link">{{userinfo.space_bili}}</div>
                   </div>
                   </a>
                 </div>
 
-                <div class="linkitem">
-                  <a target="_blank" href="0">
+                <div class="linkitem" v-if="userinfo.space_youtube">
+                  <a target="_blank" :href="userinfo.space_youtube">
                   <div class="ico">
                     <img src="@/assets/ico/userpage-linkico3.png" />
                   </div>
                   <div class="r">
                     <div class="title">TA的YOUTUBE频道</div>
-                    <div class="link">https://space.bilibili.com/254463269</div>
+                    <div class="link">{{userinfo.space_youtube}}</div>
                   </div>
                   </a>
                 </div>
 
-                <div class="linkitem">
-                  <a target="_blank" href="0">
+                <div class="linkitem" v-if="userinfo.space_zhihu">
+                  <a target="_blank" :href="userinfo.space_zhihu">
                   <div class="ico">
                     <img src="@/assets/ico/userpage-linkico4.png" />
                   </div>
                   <div class="r">
                     <div class="title">TA的知乎</div>
-                    <div class="link">https://space.bilibili.com/254463269</div>
+                    <div class="link">{{userinfo.space_zhihu}}</div>
                   </div>
                   </a>
                 </div>
 
-                <div class="linkitem">
-                  <a target="_blank" href="0">
+                <div class="linkitem" v-if="userinfo.space_github">
+                  <a target="_blank" :href="userinfo.space_github">
                   <div class="ico">
                     <img src="@/assets/ico/userpage-linkico5.png" />
                   </div>
                   <div class="r">
                     <div class="title">TA的GITHUB</div>
-                    <div class="link">https://github.com/weivis</div>
+                    <div class="link">{{userinfo.space_github}}</div>
                   </div>
                   </a>
                 </div>
@@ -129,6 +129,7 @@
 // @ is an alias to /src
 import FilterBar from "@/components/FilterBar.vue";
 import Articleitem from "@/components/item/Articleitem.vue";
+import { UserInfo } from "@/api/user";
 export default {
   name: "userhome",
   data() {
@@ -140,6 +141,8 @@ export default {
         { name: "趣味论文分享", id: 2 },
         { name: "趣味网文分享", id: 3 },
       ],
+      userinfo: {},
+      userid: {},
       data: [
         {
           id: 0,
@@ -167,6 +170,27 @@ export default {
     FilterBar, Articleitem
   },
   methods: {
+    getuserinfo(){
+      this.$http(
+        UserInfo({
+          id: this.$route.params.id,
+          type: ["space","follow"]
+        }),
+        (res) => {
+          console.log(res);
+          if (res.code == 200) {
+            this.userinfo = res.data
+            this.userid = res.data.id
+          } else {
+            this.$message({
+              message: res.msg,
+              type: "error",
+              duration: 5 * 1000,
+            });
+          }
+        }
+      );
+    },
     follow() {
       this.followstatus = 1;
     },
@@ -175,7 +199,9 @@ export default {
     },
     getList() {},
   },
-  created() {},
+  created() {
+    this.getuserinfo()
+  },
 };
 </script>
 <style lang="scss" scoped>

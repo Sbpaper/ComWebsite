@@ -45,6 +45,7 @@ Vue.component('Pagination', Pagination)
 //   })
 
 router.beforeEach((to, from, next) => {
+  console.log('Main>UserDATA',getuser())
   if (to.matched.some(record => record.meta.requireAuth)) { // 判断该路由是否需要登录权限
     // this route requires auth, check if logged in
     // if not, redirect to login page.

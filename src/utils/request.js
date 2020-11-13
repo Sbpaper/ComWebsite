@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { Message } from 'element-ui'
-import HttpRoot from '@/api/config'
+import { HttpRoot } from '@/api/config'
 import router from '../router'
 import {logout, getuser} from './auth'
 
@@ -43,7 +43,7 @@ service.interceptors.response.use(
     return res
   },
   error => {
-    console.log('err' + error) // for debug
+    console.log('err: ' + error) // for debug
     Message({
       message: error.message,
       type: 'error',

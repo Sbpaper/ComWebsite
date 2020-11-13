@@ -108,6 +108,26 @@
         .img{width: 22px;height: 22px;position: absolute;top: 0;bottom: 0;margin: auto;}
     }
 
+    .signin{
+        float: right;
+        color: #fff;
+        font-size: 12px;
+        line-height: 54px;
+    }
+    
+    .registernow{
+        float: right;
+        height: 30px;width: 110px;
+        text-align: center;
+        margin: 12px;
+        margin-right: 0;
+        margin-left: 25px;
+        background-color: #fff;
+        border-radius: 3px;
+        line-height: 30px;
+        font-size: 14px;
+    }
+
     .porup{
         z-index: 150;
         position: absolute;

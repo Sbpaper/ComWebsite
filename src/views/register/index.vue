@@ -4,7 +4,13 @@
       <div class="loginbox">
         <div class="login-title">登录</div>
         <el-input
-          v-model="account"
+          v-model="username"
+          class="txt-input"
+          placeholder="用户名"
+          prefix-icon="el-icon-user"
+        ></el-input>
+        <el-input
+          v-model="email"
           class="txt-input"
           placeholder="账户"
           prefix-icon="el-icon-user"
@@ -16,12 +22,19 @@
           prefix-icon="el-icon-key"
           show-password
         ></el-input>
+        <el-input
+          v-model="repassword"
+          class="txt-input"
+          placeholder="密码"
+          prefix-icon="el-icon-key"
+          show-password
+        ></el-input>
         <div style="text-align: center; margin-top: 110px">
           <el-button
             type="primary"
             round
             align="center"
-            @click.native="loginstart"
+            @click.native="startregister"
             >立即登录</el-button
           >
         </div>
@@ -30,15 +43,17 @@
   </div>
 </template>
 <script>
-import { Userlogin } from "@/api/login";
-import { login } from "@/utils/auth";
+import { Register } from "@/api/register";
+// import { login } from "@/utils/auth";
 export default {
   name: "login",
   created() {},
   data() {
     return {
-      account: "",
+      email: "",
       password: "",
+      repassword: "",
+      username: ""
     };
   },
   methods: {
@@ -53,7 +68,7 @@ export default {
         return true;
       }
     },
-    loginstart() {
+    startregister() {
       if (this.seedauth() == false) {
         return console.log("终止");
       }
@@ -62,19 +77,20 @@ export default {
         type: "success",
       });
       this.$http(
-        Userlogin({
-          account: this.account,
+        Register({
+          email: this.email,
           password: this.password,
+          repassword: this.repassword,
+          username: this.username
         }),
         (res) => {
           console.log(res);
           if (res.code == 200) {
             this.$message({
-              message: "登录成功",
+              message: "注册",
               type: "success",
             });
-            login(res.data.token, res.data.username, res.data.head, res.data.id);
-            this.$router.push({ name: "homeFind" });
+            this.$router.push({ name: "login" });
           } else {
             this.$message({
               message: res.msg,

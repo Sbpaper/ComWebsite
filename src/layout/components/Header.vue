@@ -28,20 +28,34 @@
           
         </div>
         
-        <div class="userhead r" @click="openporupc">
-          <div class="ico"><i class="el-icon-arrow-down"></i></div>
-          <div class="img"><img src="@/assets/userhead.png" /></div>
+        <div class="registernow" v-if="!loginstatus">
+          <router-link :to="'/register'" exact>
+            Register Now
+          </router-link>
         </div>
 
-        <router-link :to="'/push'" exact>
+        <div class="signin" v-if="!loginstatus">
+          <router-link :to="'/sign-in'" exact>
+            Sign in
+          </router-link>
+        </div>
+
+        <div class="userhead r" @click="openporupc" v-if="loginstatus">
+          <div class="ico"><i class="el-icon-arrow-down"></i></div>
+          <div class="img"><img :src="userdata.Userhead" /></div>
+        </div>
+
+        <router-link :to="'/push'" exact v-if="loginstatus">
           <div class="icobut r" v-if="headermodule == 1">
             <div class="img"><img src="@/assets/ico/header-add.png"></div>
           </div>
         </router-link>
 
-        <div class="icobut r" v-if="headermodule == 1">
-          <div class="img"><img src="@/assets/ico/header-msg.png"></div>
-        </div>
+        <router-link :to="'/message'" exact v-if="loginstatus">
+          <div class="icobut r" v-if="headermodule == 1">
+            <div class="img"><img src="@/assets/ico/header-msg.png"></div>
+          </div>
+        </router-link>
 
         <div class="search r" v-if="headermodule == 1">
           <div class="li">
@@ -52,13 +66,15 @@
           </div>
         </div>
 
-        <div class="porup" v-if="openporup== true">
+        <div class="porup" v-if="openporup== true && loginstatus == true">
           <div class="user">
-            <div class="header"><img src="@/assets/userhead.png" /></div>
+            <div class="header"><img :src="userdata.Userhead" /></div>
             
-            <div class="rbox">
-               <div class="username">WeiVi</div>
+            <div class="rbox" @click="openporup = false">
+              <router-link class="normal" :to="'/account'" exact>
+               <div class="username">{{userdata.Username}}</div>
                <div class="button">账号设置</div>
+               </router-link>
             </div>
           </div>
           <div class="mun">
@@ -71,7 +87,7 @@
               <div class="name">新增</div>
             </div>
             <div class="item" @click="openporup = false">
-              <router-link :to="'/u/' + userid" exact>
+              <router-link :to="'/u/' + userdata.UserID" exact>
               <div class="ico"><img src="@/assets/ico/header-my.png" /></div>
               <div class="name">我的主页</div>
               </router-link>
@@ -106,11 +122,12 @@ export default {
   components: {},
   data() {
     return {
+      loginstatus: false,
       searchinput: "",
       openporup: false,
       headermodule: 1,
       screenWidth: document.body.clientWidth,
-      userid: null,
+      userdata: {}
     };
   },
   created(){
@@ -123,11 +140,10 @@ export default {
 
     let creuser = getuser()
     if (creuser.Token){
+      this.loginstatus = true
       this.userid = creuser.UserID
-    }else{
-      this.userid = 1
+      this.userdata = creuser
     }
-
   },
   watch: {
     // headermodule(val){

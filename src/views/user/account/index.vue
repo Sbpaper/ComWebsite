@@ -1,15 +1,12 @@
 <template>
     <div class="layout">
       <div class="w">
-        <div class="title">我的创作中心</div>
+        <div class="title">我的账户</div>
       </div>
       <div class="w">
         <el-tabs tab-position="left" v-model="activeName" class="tab">
-          <el-tab-pane label="全部文章" name="List"></el-tab-pane>
-          <el-tab-pane label="正常文章" name="Liste"></el-tab-pane>
-          <el-tab-pane label="审核中或等待审核" name="Listb"></el-tab-pane>
-          <el-tab-pane label="我收到的评论" name="Lista"></el-tab-pane>
-          <el-tab-pane label="回收站" name="Listc"></el-tab-pane>
+          <el-tab-pane label="我的" name="mainpage"></el-tab-pane>
+          <el-tab-pane label="修改密码" name="changepassword"></el-tab-pane>
         </el-tabs>
         <div class="component"><component :is="isComponent" ></component></div>
     </div>
@@ -17,20 +14,15 @@
 </template>
 
 <script>
-import List from "./list.vue";
-import Lista from "./list2.vue";
-import Listb from "./list.vue";
-import Listc from "./list2.vue";
+import mainpage from "./mainpage.vue";
+import changepassword from "./changepassword.vue";
 export default {
     data() {
        return {
-         activeName: "List",
+         activeName: "mainpage",
          componentsList: {
-           List: "List",//需要引入具体的组件
-           Lista: "Lista",
-           Listb: "Listb",
-           Listc: "Listc",
-           Liste: "Listb"
+            mainpage: "mainpage",//需要引入具体的组件
+            changepassword: "changepassword"
            }
        }
     },
@@ -40,7 +32,7 @@ export default {
         }
     },
     components: {
-      List,Lista, Listb,Listc
+      mainpage, changepassword
     },
 }
 </script>
@@ -60,6 +52,6 @@ export default {
 .component{
   margin-top: 80px;
   float: right;
-  width: calc(100% - 140px);
+  width: calc(100% - 130px);
 }
 </style>

@@ -35,8 +35,20 @@ const routes = [
       {
         path: '',
         name: 'UserAccount',
-        component: () => import('@/views/user/account.vue'),
+        component: () => import('@/views/user/account'),
         meta: {title:'我的账户', requireAuth: false}
+      }
+    ]
+  },
+  {
+    path: '/message',
+    component: FullLayout,
+    children: [
+      {
+        path: '',
+        name: 'message',
+        component: () => import('@/views/user/msg.vue'),
+        meta: {title:'消息', requireAuth: false}
       }
     ]
   },
@@ -139,11 +151,18 @@ const routes = [
     ]
   },
   {
-    path: '/login',
+    path: '/sign-in',
     name: 'login',
     hidden: true,
     meta: {title:'登录', requireAuth: false},
     component: () => import('@/views/login/')
+  },
+  {
+    path: '/register',
+    name: 'register',
+    hidden: true,
+    meta: {title:'登录', requireAuth: false},
+    component: () => import('@/views/register/')
   }
 ]
 
