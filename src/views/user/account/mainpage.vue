@@ -26,7 +26,7 @@
       </div>
 
       <div class="li">
-        <el-button>保存</el-button>
+        <el-button @click="Saveusername()">保存</el-button>
       </div>
     </div>
 
@@ -102,7 +102,7 @@
 // @ is an alias to /src
 import Upload from "@/components/Upload.vue";
 import { getuser, uploaduserhead } from "@/utils/auth";
-import { UserInfo, Changeinfo } from "@/api/user";
+import { UserInfo, Changeinfo, ChangeUsername } from "@/api/user";
 export default {
   name: "mainpage",
   data() {
@@ -171,6 +171,28 @@ export default {
               duration: 5 * 1000,
             });
             uploaduserhead(res.data.userhead)
+          } else {
+            this.$message({
+              message: res.msg,
+              type: "error",
+              duration: 5 * 1000,
+            });
+          }
+        }
+      );
+    },
+    Saveusername(){
+      this.$http(
+        ChangeUsername({
+          "username": this.username
+        }),
+        (res) => {
+          console.log(res);
+          if (res.code == 200) {
+            this.$message({
+              message: res.msg,
+              duration: 5 * 1000,
+            });
           } else {
             this.$message({
               message: res.msg,

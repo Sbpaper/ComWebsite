@@ -87,7 +87,7 @@ export default {
             introduce: "女生可能有所不知，我们男生上厕所的时候，一般都选隔壁没人的坑...毕竟隔壁有人跟你一起尿尿总觉得怪怪的。由此，男生的坑位多少就很有讲究了，今天我就用算法的思维跟大家讲讲，设计多少个坑位，才不至于尴尬的同时更划算",
             cover:"https://www.weivird.com/static/article/cover/20201029053553433.png",
             author: "毕导THU",
-            pushtype: 1,
+            // pushtype: 1,
             sourcetype: 2,
             commentcount: 38,
             user:{

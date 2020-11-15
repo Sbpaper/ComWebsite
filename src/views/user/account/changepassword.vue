@@ -14,7 +14,7 @@
         <el-input placeholder="重复输入一次密码" v-model="repassword" show-password></el-input>
       </div>
       <div class="li">
-        <el-button>确定</el-button>
+        <el-button @click="SavePassword()">确定</el-button>
       </div>
     </div>
 
@@ -23,6 +23,7 @@
 
 <script>
 // @ is an alias to /src
+import { ChangePassword } from "@/api/user";
 export default {
   name: "mainpage",
   data() {
@@ -35,6 +36,30 @@ export default {
   components: {
   },
   methods: {
+    SavePassword(){
+      this.$http(
+        ChangePassword({
+          "nowpassword": this.nowpassword,
+          "newpassword": this.password,
+          "renewpassword": this.repassword,
+        }),
+        (res) => {
+          console.log(res);
+          if (res.code == 200) {
+            this.$message({
+              message: res.msg,
+              duration: 5 * 1000,
+            });
+          } else {
+            this.$message({
+              message: res.msg,
+              type: "error",
+              duration: 5 * 1000,
+            });
+          }
+        }
+      );
+    },
   },
   created() {
   }
