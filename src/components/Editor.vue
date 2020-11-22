@@ -28,7 +28,7 @@ export default {
 
       const formData = new FormData();
       formData.append("file", file);
-      formData.append("uploadKey", "articleimg");
+      formData.append("uploadKey", "article_pic");
       this.$http(upload(formData), (res) => {
         console.log(res);
         if (res.code == 200) {

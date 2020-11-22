@@ -8,8 +8,8 @@
       </div>
       <div class="itemlis">
       <div v-for="(item, index) in data" :key="'IndexSidebar' + tabname + '-' + index" class="item">
-            <router-link :to="link + item.to">
-                {{item.title}}
+            <router-link :to="link + item.id">
+                {{item.name}}
             </router-link>
       </div>
       </div>

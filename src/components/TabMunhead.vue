@@ -49,7 +49,7 @@ export default {
 
 $itemheight: 40px;
 .TabMunhead{
-  // margin-bottom: 30px;
+  margin-bottom: 10px;
   width: 100%;
   display: flow-root;
 }

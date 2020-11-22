@@ -71,7 +71,7 @@ const routes = [
       {
         path: '',
         name: 'Push',
-        component: () => import('@/views/home/push.vue'),
+        component: () => import('@/views/home/pushoredit.vue'),
         meta: {title:'发布', requireAuth: false}
       }
     ]

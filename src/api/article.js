@@ -26,7 +26,7 @@ export function Putchange(data) {
 
 export function Putarticle(data) {
     return request({
-        url: '/article/Put',
+        url: '/article/push',
         method: 'post',
         data: data
     })

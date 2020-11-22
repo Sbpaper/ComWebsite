@@ -1,17 +1,37 @@
 <template>
     <el-row class="input">
+
         <el-upload
-            
+            style="
+              height: 200px !important;
+              width: 200px !important;
+            "
             :show-file-list="false"
             drag
             action
             :http-request="upLoad"
             multiple
+            v-if="uploadkey == 'userhead'"
         >
         <img v-if="lodpath" :src="lodpath" class="img" />
         <i class="el-icon-upload"></i>
         <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
       </el-upload>
+
+      <el-upload
+        class="width: 100%"
+        drag
+        action
+        :http-request="upLoad"
+        v-if="uploadkey != 'userhead'"
+        :show-file-list="false"
+        multiple>
+        <img v-if="lodpath" :src="lodpath" class="img" />
+        <i class="el-icon-upload"></i>
+        <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+        <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
+      </el-upload>
+
       <div v-if="debug">
           {{uploadkey}}
           {{filename}}
